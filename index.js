@@ -8,6 +8,8 @@ const app = express();
 
 const corsOptions = {
 	origin: true,
+	methods: ['POST'],
+	allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 app.use(express.json());
