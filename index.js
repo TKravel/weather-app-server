@@ -10,13 +10,15 @@ const corsOptions = {
 	origin: 'https://eloquent-bardeen-6340b4.netlify.app',
 	methods: ['POST'],
 	allowedHeaders: ['Content-Type', 'Authorization'],
+	preflightContinue: true,
+	optionsSuccessStatus: 204,
 };
 
 app.use(express.json());
 app.use(cors(corsOptions));
 
 app.options('/getData', cors(corsOptions));
-app.post('/getData', (req, res) => {
+app.post('/getData', cors(corsOptions), (req, res) => {
 	console.log('test');
 	const search = req.body.userLocation;
 	console.log(search);
