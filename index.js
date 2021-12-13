@@ -15,7 +15,7 @@ const corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 
-app.options('/getData', cors());
+app.options('/getData', cors(corsOptions));
 app.post('/getData', (req, res) => {
 	console.log('test');
 	const search = req.body.userLocation;
