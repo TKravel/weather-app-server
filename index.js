@@ -9,25 +9,34 @@ app.use(express.json());
 
 app.post('/getData', (req, res) => {
 	console.log('test');
-	const locationSearch = req.body.userLocation;
-	console.log(locationSearch);
+	const search = req.body.userLocation;
+	console.log(search);
 
-	// axios
-	// 	.get(
-	// 		`http://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_KEY}&q=18901`
-	// 	)
-	// 	.then((response) => {
-	// 		// handle success
-	// 		console.log(response.data);
-	// 		res.send(response.data);
-	// 	})
-	// 	.catch((error) => {
-	// 		// handle error
-	// 		console.log(error);
-	// 	})
-	// 	.then(() => {
-	// 		// always executed
-	// 	});
+	if (search === '' || search === undefined) {
+		return;
+	}
+
+	axios
+		.get(
+			`http://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_KEY}&q=${search}&days=3&aqi=no&alerts=yes`
+		)
+		.then((response) => {
+			// handle success
+			if (response.data.error) {
+				console.log('erRoR: ' + response.data.error);
+				res.send(response.data.error);
+			} else {
+				res.send(response.data);
+			}
+		})
+		.catch((error) => {
+			// handle error
+			console.log(error);
+			res.send(error);
+		})
+		.then(() => {
+			// always executed
+		});
 });
 
 app.listen(PORT, () => {
