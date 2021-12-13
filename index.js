@@ -7,9 +7,11 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 const corsOptions = {
-	origin: 'https://eloquent-bardeen-6340b4.netlify.app',
+	origin: [
+		'https://eloquent-bardeen-6340b4.netlify.app',
+		'http://localhost:3000',
+	],
 	methods: ['POST'],
-	allowedHeaders: ['Content-Type', 'Authorization'],
 	preflightContinue: true,
 	optionsSuccessStatus: 204,
 };
