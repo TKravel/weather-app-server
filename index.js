@@ -35,17 +35,11 @@ app.post('/getData', cors(corsOptions), (req, res) => {
 		)
 		.then((response) => {
 			// handle success
-			if (response.data.error) {
-				console.log('erRoR: ' + response.data.error);
-				res.send(response.data.error);
-			} else {
-				res.send(response.data);
-			}
+			res.send(response.data);
 		})
 		.catch((error) => {
 			// handle error
-			console.log(error);
-			res.send(error);
+			res.status(400).json({ msg: error.response.statusText });
 		})
 		.then(() => {
 			// always executed
