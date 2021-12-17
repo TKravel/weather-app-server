@@ -34,15 +34,13 @@ app.post('/getData', cors(corsOptions), (req, res) => {
 			`http://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_KEY}&q=${search}&days=3&aqi=no&alerts=yes`
 		)
 		.then((response) => {
-			// handle success
 			res.send(response.data);
 		})
 		.catch((error) => {
-			// handle error
 			res.status(400).json({ msg: error.response.statusText });
 		})
 		.then(() => {
-			// always executed
+			console.log('Request received');
 		});
 });
 
